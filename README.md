@@ -18,3 +18,7 @@ Neko-chat (Backend): https://github.com/igormieski27/backend-neko-chat/
 ### English:
  - Neko-chat is an anonymous chat project built with Angular + GO, designed to enhance my skills in Websockets usage. This chat operates under the principle of absolute privacy, refraining from retaining any user information. Upon connection, users are assigned the name of an animal, granting them access to view all messages within the chat. Upon disconnection, access to the conversation history is permanently terminated.
 Highlighted practices in this project encompass Websockets utilization, implementation of clean code, among others.
+
+
+![image](https://github.com/igormieski27/backend-neko-chat/assets/108681204/2f5b7f61-42c7-4e01-bd8b-78dda1d3a11b)
+
