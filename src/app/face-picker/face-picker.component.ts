@@ -1,6 +1,12 @@
 // face-picker.component.ts
 
-import { Component, OnInit, OnDestroy } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  Output,
+  EventEmitter,
+} from "@angular/core";
 import { Subscription } from "rxjs";
 import { faces } from "../cool-faces";
 import { FacePickerService } from "./face-picker.service";
@@ -34,6 +40,9 @@ import { FacePickerService } from "./face-picker.service";
         overflow-x: hidden;
         max-width: 30vw;
         white-space: pre;
+        left: 26%;
+        bottom: 30%;
+        background-color: black;
       }
 
       .face-picker div {
@@ -51,6 +60,7 @@ import { FacePickerService } from "./face-picker.service";
   ],
 })
 export class FacePickerComponent implements OnInit, OnDestroy {
+  @Output() faceSelected = new EventEmitter<string>();
   coolFaces = faces;
   private pickerVisibleSubscription: Subscription = new Subscription();
   pickerVisible: boolean = false;
@@ -69,8 +79,7 @@ export class FacePickerComponent implements OnInit, OnDestroy {
   }
 
   selectFace(face: string) {
-    // You can emit an event or do something with the selected face
-    console.log("Selected face:", face);
+    this.faceSelected.emit(face);
     this.facePickerService.hidePicker();
   }
 }

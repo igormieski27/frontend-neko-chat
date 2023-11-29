@@ -1,4 +1,23 @@
 <style>
+  @keyframes float {
+    0% {
+      box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+      transform: translatey(0px);
+    }
+    50% {
+      box-shadow: 0 25px 15px 0px rgba(0, 0, 0, 0.2);
+      transform: translatey(-20px);
+    }
+    100% {
+      box-shadow: 0 5px 15px 0px rgba(0, 0, 0, 0.6);
+      transform: translatey(0px);
+    }
+  }
+
+  .animated {
+    margin: 20px;
+    animation: float 2s ease-in-out infinite;
+  }
   .chat-container {
     display: flex;
     flex-direction: column;
@@ -7,7 +26,7 @@
     width: 50%;
     word-wrap: break-word;
     margin: auto;
-    border: 1px solid white
+    border: 1px solid white;
   }
 
   .italic-message {
@@ -30,8 +49,10 @@
     outline: none;
     background: transparent;
     color: #333;
-    padding: 4px;
-    margin-left: 8px;
+    width: 50%;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid white;
   }
 
   .message-form {
@@ -63,48 +84,84 @@
   button:hover {
     background: #125699;
   }
+
+  @font-face {
+    font-family: "CooperBits";
+    src: url("assets/CooperBits.ttf") format("truetype");
+    font-weight: normal;
+    font-style: normal;
+  }
 </style>
-<div style="display: flex;"> 
-  <pre style="font-family: monospace; margin: auto;">
-    _   _      _         _____ _           _   
-    | \ | |    | |       /  __ \ |         | |  
-    |  \| | ___| | _____ | /  \/ |__   __ _| |_ 
-    | . ` |/ _ \ |/ / _ \| |   | '_ \ / _` | __|
-    | |\  |  __/   < (_) | \__/\ | | | (_| | |_ 
-    \_| \_/\___|_|\_\___/ \____/_| |_|\__,_|\__|
-                                                
-  </pre>
+<div style="display: flex; flex-direction: column; margin-bottom: 50px">
+  <span
+    style="
+      font-family: CooperBits;
+      margin: auto;
+      font-size: 64px;
+
+      display: flex;
+    "
+  >
+    <div class="animated">＼(=^‥^)/</div>
+    nekoChat
+    <div class="animated">＼(^‥^=)/</div>
+  </span>
+  <span style="margin: auto"> free anonymous chat! </span>
 </div>
-<div style="display:flex;">
+
+<div style="display: flex; flex-direction: column">
   <div class="chat-container">
     <ul id="messages">
-      <li *ngFor="let message of messages">
-        <span *ngIf="message.sender != 'system'" [style.color]="message.color"
-          >{{ message.sender }} says:</span
-        >
-        <span
+      <li
+        style="height: 30px; padding-top: 3px; padding-bottom: 3px"
+        *ngFor="let message of messages"
+      >
+        <ngx-typed-js
+          style="padding: 0"
           [style.color]="message.sender === 'system' ? message.color : 'white'"
-          [class.italic-message]="message.text.startsWith('/')"
+          [class.italic-message]="message.text.startsWith('[')"
+          [strings]="[message.text]"
+          [typeSpeed]="20"
+          [showCursor]="false"
+          (preStringTyped)="playTypeSound()"
+          (completed)="stopTypeSound()"
         >
-          {{
-            message.text.startsWith("/") ? message.text.substr(1) : message.text
-          }}
-        </span>
-      </li>
-      <li>
-        <input
-          class="user-input"
-          style="color: white"
-          [(ngModel)]="chatBox"
-          [ngModelOptions]="{ standalone: true }"
-          autocomplete="off"
-          placeholder="Write a message..."
-          (keydown.enter)="send(); hidePicker()"
-          (keydown.alt.q)="showPicker()"
-        />
+          <span *ngIf="message.sender != 'system'" [style.color]="message.color"
+            >{{ message.sender }} says:</span
+          >
+          <span class="typing"></span>
+        </ngx-typed-js>
       </li>
     </ul>
   </div>
+  <input
+    class="user-input"
+    style="color: white"
+    [(ngModel)]="chatBox"
+    [ngModelOptions]="{ standalone: true }"
+    autocomplete="off"
+    placeholder="write a message..."
+    (keydown.enter)="send(); hidePicker()"
+    (keydown.alt.q)="showPicker()"
+  />
+  <span style="margin: 5px auto 0px 25%; font-size: 16px"
+    >Alt + Q - kaomoji menu</span
+  >
+  <span style="margin: 50px auto; font-size: 16px; color: greenyellow"
+    >Made by igor |
+    <a
+      style="text-decoration: none"
+      href="https://www.github.com/igormieski27"
+      target="_blank"
+    >
+      <img
+        style="margin-bottom: -8px; margin-right: 5px"
+        src="../assets/github.png"
+        height="30px"
+        width="30px"
+      />github</a
+    >
+  </span>
 </div>
 
-<app-face-picker></app-face-picker>
+<app-face-picker (faceSelected)="chatBox = chatBox + $event"></app-face-picker>

@@ -8,6 +8,7 @@ import { SocketService } from "./socket.service";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { MatIconModule } from "@angular/material/icon";
 import { FacePickerComponent } from './face-picker/face-picker.component';
+import {NgxTypedJsModule} from 'ngx-typed-js';
 
 @NgModule({
   declarations: [AppComponent, FacePickerComponent],
@@ -17,6 +18,7 @@ import { FacePickerComponent } from './face-picker/face-picker.component';
     HttpClientModule,
     BrowserAnimationsModule,
     MatIconModule,
+    NgxTypedJsModule,
   ],
   providers: [SocketService],
   bootstrap: [AppComponent],
