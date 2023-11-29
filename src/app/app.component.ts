@@ -1,33 +1,53 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { SocketService } from "./socket.service";
+import { MessageModel } from "./models/message.model";
+import { Subscription } from "rxjs";
+import { faces } from "./cool-faces";
+import { FacePickerService } from "./face-picker/face-picker.service";
 
 @Component({
   selector: "app-root",
   templateUrl: "./app.component.html",
 })
 export class AppComponent implements OnInit, OnDestroy {
-  public messages: Array<any>;
+  public messages: Array<MessageModel> = new Array<MessageModel>();
   public chatBox: string;
-
-  public constructor(private socket: SocketService) {
-    this.messages = [];
+  public faces = faces;
+  private pickerVisibleSubscription: Subscription = new Subscription();
+  public constructor(
+    private socket: SocketService,
+    private facePickerService: FacePickerService
+  ) {
     this.chatBox = "";
   }
 
   public ngOnInit() {
     this.socket.getEventListener().subscribe((event) => {
+      console.log(event);
       if (event.type == "message") {
-        let data = event.data.content;
+        let data = new MessageModel();
         if (event.data.sender) {
-          data = event.data.sender + ": " + data;
+          data.sender = " > " + event.data.sender;
+        } else {
+          data.sender = "system";
         }
+        data.text = event.data.content;
+        data.color = event.data.color;
         this.messages.push(data);
       }
       if (event.type == "close") {
-        this.messages.push("/connection closed... ಥ_ಥ ");
+        this.messages.push({
+          text: "/connection failed... ಥ_ಥ!! Retrying... ",
+          color: "red",
+          sender: "system",
+        });
       }
       if (event.type == "open") {
-        this.messages.push("/connection established!!!... (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ ");
+        this.messages.push({
+          text: "/connection established!!!... (ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ ",
+          color: "white",
+          sender: "system",
+        });
       }
     });
   }
@@ -43,9 +63,11 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
-  public isSystemMessage(message: string) {
-    return message.startsWith("/")
-      ? "<strong>" + message.substring(1) + "</strong>"
-      : message;
+  showPicker() {
+    this.facePickerService.showPicker();
+  }
+
+  hidePicker() {
+    this.facePickerService.hidePicker();
   }
 }

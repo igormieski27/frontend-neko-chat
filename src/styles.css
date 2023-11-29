@@ -1,11 +1,59 @@
 /* You can add global styles to this file, and also import other style files */
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font: 13px Helvetica, Arial; padding: 5px}
-form { padding: 3px; position: fixed; bottom: 0; width: 100%; }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Minecraft", sans-serif; /* Use 'Minecraft' como a fonte padrão para o corpo do documento */
+  font-weight: normal;
+  font-style: normal;
+  padding: 5px;
+  font-size: 22px;
+}
+@font-face {
+  font-family: "Minecraft";
+  src: url("assets/Minecraft.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: "Minecraft", sans-serif; /* Use 'Minecraft' como a fonte padrão para o corpo do documento */
+  padding: 5px;
+}
+form {
+  padding: 3px;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
 form input {
   border: 2px solid #24292e;
-  padding: 10px; width: 90%; margin-right: .5%; }
-form button { width: 9%; background: cyan; border: 2px solid #24292e; padding: 10px; }
-#messages { list-style-type: none; margin: 0; padding: 0; }
-#messages li { padding: 5px 10px; }
-#messages li:nth-child(odd) { background: #eee; }
+  padding: 10px;
+  width: 90%;
+  margin-right: 0.5%;
+}
+form button {
+  width: 9%;
+  background: cyan;
+  border: 2px solid #24292e;
+  padding: 10px;
+}
+#messages {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+#messages li {
+  padding: 5px 10px;
+}
+
+html,
+body {
+  height: 100%;
+  background-color: black;
+  color: white;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
