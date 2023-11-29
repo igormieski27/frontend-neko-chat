@@ -1,11 +1,12 @@
-
-  <pre align="center">
+<p align="center">
+  <pre >
     | \ | |    | |        / ____| |         | |  
     |  \| | ___| | _____ | |    | |__   __ _| |_ 
     | . ` |/ _ \ |/ / _ \| |    | '_ \ / _` | __|
     | |\  |  __/   < (_) | |____| | | | (_| | |_ 
     |_| \_|\___|_|\_\___/ \_____|_| |_|\__,_|\__|
   </pre>
+  </p>
   
 Neko-chat (frontend): https://github.com/igormieski27/frontend-neko-chat/ <br>
 Neko-chat (Backend): https://github.com/igormieski27/backend-neko-chat/
