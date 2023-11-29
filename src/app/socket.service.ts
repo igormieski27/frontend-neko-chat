@@ -1,22 +1,23 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable, EventEmitter } from "@angular/core";
 
 @Injectable()
 export class SocketService {
-
   private socket: WebSocket;
   private listener: EventEmitter<any> = new EventEmitter();
 
   public constructor() {
-    this.socket = new WebSocket("ws://localhost:12345/ws");
-    this.socket.onopen = event => {
-      this.listener.emit({"type": "open", "data": event});
-    }
-    this.socket.onclose = event => {
-      this.listener.emit({"type": "close", "data": event});
-    }
-    this.socket.onmessage = event => {
-      this.listener.emit({"type": "message", "data": JSON.parse(event.data)});
-    }
+    this.socket = new WebSocket(
+      "ws://backend-neko-chat-aged-sunset-3384.fly.dev/ws"
+    );
+    this.socket.onopen = (event) => {
+      this.listener.emit({ type: "open", data: event });
+    };
+    this.socket.onclose = (event) => {
+      this.listener.emit({ type: "close", data: event });
+    };
+    this.socket.onmessage = (event) => {
+      this.listener.emit({ type: "message", data: JSON.parse(event.data) });
+    };
   }
 
   public send(data: string) {
@@ -30,5 +31,4 @@ export class SocketService {
   public getEventListener() {
     return this.listener;
   }
-
 }
