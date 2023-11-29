@@ -11,9 +11,9 @@ Neko-chat (frontend): https://github.com/igormieski27/frontend-neko-chat/ <br>
 Neko-chat (Backend): https://github.com/igormieski27/backend-neko-chat/
 
 ---------------------------------------------------------------------
-<img align="center">
- ![image](https://github.com/igormieski27/frontend-neko-chat/assets/108681204/28cfcee0-9c7e-4dbc-8666-f5fdc4375a5b)
-</img>
+<p align="center">
+ <img src="https://github.com/igormieski27/frontend-neko-chat/assets/108681204/28cfcee0-9c7e-4dbc-8666-f5fdc4375a5b"/>
+</p>
 
 
 ### Português:
