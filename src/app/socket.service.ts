@@ -6,7 +6,7 @@ export class SocketService {
   private listener: EventEmitter<any> = new EventEmitter();
 
   public constructor() {
-    this.socket = new WebSocket("ws:/fly-builder-dawn-cloud-455.fly.dev/ws");
+    this.socket = new WebSocket("wss:/fly-builder-dawn-cloud-455.fly.dev/ws");
     this.socket.onopen = (event) => {
       this.listener.emit({ type: "open", data: event });
     };
