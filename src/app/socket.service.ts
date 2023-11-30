@@ -7,7 +7,7 @@ export class SocketService {
 
   public constructor() {
     this.socket = new WebSocket(
-      "ws://backend-neko-chat-aged-sunset-3384.fly.dev/ws"
+      "ws://backend-neko-bitter-darkness-2830-cool-river-1440.fly.dev/ws"
     );
     this.socket.onopen = (event) => {
       this.listener.emit({ type: "open", data: event });
